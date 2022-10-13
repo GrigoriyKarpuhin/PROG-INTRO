@@ -4,47 +4,45 @@ import java.util.*;
 public class WordStatWords {
 	public static void main(String[] args) throws IOException {
 		TreeMap<String, Integer> words = new TreeMap<>();
-		String letters = ("");
+		StringBuilder letters = new StringBuilder();
+		Reader reader = new BufferedReader(new InputStreamReader(
+			new FileInputStream(args[0]),
+			"utf8"
+		));
 		try {
-			Reader reader = new BufferedReader(new InputStreamReader(
-				new FileInputStream(args[0]),
-				"utf8"
-			));
-			try {
-				int read = reader.read();
-				while (read >= 0) {
-					if (Character.isLetter(read) == true || read == '\'' || Character.DASH_PUNCTUATION == Character.getType(read)) {
-					    letters += ((char)read);					
+			int read = reader.read();
+			while (read >= 0) {
+				if (Character.isLetter(read) == true || read == '\'' || Character.DASH_PUNCTUATION == Character.getType(read)) {
+					   letters.append((char)read);	
+				} else {
+					String lettersSt = letters.toString();
+					if (words.containsKey(lettersSt.toLowerCase()) == true) {
+					words.replace(lettersSt.toLowerCase(), words.get(lettersSt.toLowerCase()) + 1);
+					letters.setLength(0);	
 					} else {
-						if (words.containsKey(letters.toLowerCase()) == true) {
-						words.put(letters.toLowerCase(), words.get(letters.toLowerCase()) + 1);
-						letters = ("");	
-						} else {
-							if (letters != "") {
-								words.put(letters.toLowerCase(), 1);
-								letters = ("");
-							}
+						if (letters.length() != 0) {
+							words.put(lettersSt.toLowerCase(), 1);
+							letters.setLength(0);
 						}
 					}
-					read = reader.read();
 				}
-			} finally {
+				read = reader.read();
+			}
+		} finally {
 			reader.close();
+		}
+		BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(
+			new FileOutputStream(args[1]),
+			"utf8"
+		));
+		Set<String> key = words.keySet();
+		try {
+			for(String s: key) {
+				writer.write(s + " " + words.get(s));
+				writer.newLine();
 			}
-				BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(
-				new FileOutputStream(args[1]),
-				"utf8"
-			));
-			Set<String> key = words.keySet();
-			try {
-				for(String s: key) {
-					writer.write(s + " " + words.get(s));
-					writer.newLine();
-				}
-			} finally {
-				writer.close();
-			}
-		} catch (IOException e) {
+		} finally {
+			writer.close();
 		}
 	}
 }

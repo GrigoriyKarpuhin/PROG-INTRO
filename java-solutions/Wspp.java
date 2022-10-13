@@ -1,10 +1,12 @@
 import java.io.*;
 import java.util.*;
 //
-public class WordStatInput {
+public class Wspp {
 	public static void main(String[] args) throws IOException {
 		LinkedHashMap<String, Integer> words = new LinkedHashMap<>();
+		LinkedHashMap<String, StringBuilder> wspp = new LinkedHashMap<>();
 		StringBuilder letters = new StringBuilder();
+		int count = 1;
 		Reader reader = new BufferedReader(new InputStreamReader(
 			new FileInputStream(args[0]),
 			"utf8"
@@ -18,10 +20,14 @@ public class WordStatInput {
 					String lettersSt = letters.toString();
 					if (words.containsKey(lettersSt.toLowerCase()) == true) {
 					words.replace(lettersSt.toLowerCase(), words.get(lettersSt.toLowerCase()) + 1);
+					wspp.replace(lettersSt.toLowerCase(), wspp.get(lettersSt.toLowerCase()).append(" " + count));
+					count++;
 					letters.setLength(0);	
 					} else {
 						if (letters.length() != 0) {
 							words.put(lettersSt.toLowerCase(), 1);
+							wspp.put(lettersSt.toLowerCase(), new StringBuilder(count + ""));
+							count++;
 							letters.setLength(0);
 						}
 					}
@@ -38,7 +44,7 @@ public class WordStatInput {
 		Set<String> key = words.keySet();
 		try {
 			for(String s: key) {
-				writer.write(s + " " + words.get(s));
+				writer.write(s + " " + words.get(s) + " " + wspp.get(s));
 				writer.newLine();
 			}
 		} finally {
