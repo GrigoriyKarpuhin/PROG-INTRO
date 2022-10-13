@@ -16,7 +16,7 @@ public class WordStatWords {
 					   letters.append((char)read);	
 				} else {
 					String lettersSt = letters.toString();
-					if (words.containsKey(lettersSt.toLowerCase()) == true) {
+					if (words.containsKey(lettersSt.toLowerCase())) {
 					words.replace(lettersSt.toLowerCase(), words.get(lettersSt.toLowerCase()) + 1);
 					letters.setLength(0);	
 					} else {

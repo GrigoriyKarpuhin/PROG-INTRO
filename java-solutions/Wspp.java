@@ -18,7 +18,7 @@ public class Wspp {
 					   letters.append((char)read);	
 				} else {
 					String lettersSt = letters.toString();
-					if (words.containsKey(lettersSt.toLowerCase()) == true) {
+					if (words.containsKey(lettersSt.toLowerCase())) {
 					words.replace(lettersSt.toLowerCase(), words.get(lettersSt.toLowerCase()) + 1);
 					wspp.replace(lettersSt.toLowerCase(), wspp.get(lettersSt.toLowerCase()).append(" " + count));
 					count++;
