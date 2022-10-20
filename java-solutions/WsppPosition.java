@@ -2,6 +2,8 @@ import java.io.*;
 import java.util.*;
 //
 public class WsppPosition {
+
+    // :NOTE: no exceptions in main()
 	public static void main(String[] args) throws IOException {
 		LinkedHashMap<String, Integer> words = new LinkedHashMap<>();
 		LinkedHashMap<String, StringBuilder> wspp = new LinkedHashMap<>();
@@ -14,6 +16,7 @@ public class WsppPosition {
 			OwnScanner scan2 = new OwnScanner(line);
 			while (scan2.hasNextWord()) {
 				String lettersSt = scan2.nextWord();
+                // getOrDefault
 				if (words.containsKey(lettersSt.toLowerCase())) {
 					words.replace(lettersSt.toLowerCase(), words.get(lettersSt.toLowerCase()) + 1);
 					wspp.replace(lettersSt.toLowerCase(), wspp.get(lettersSt.toLowerCase()).append(" " + countSt + ":" + count));
