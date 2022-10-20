@@ -8,40 +8,27 @@ public class WsppPosition {
 		StringBuilder letters = new StringBuilder();
 		int count = 1;
 		int countSt = 1;
-		Reader reader = new BufferedReader(new InputStreamReader(
-			new FileInputStream(args[0]),
-			"utf8"
-		));
-		try {
-			int read = reader.read();
-			while (read >= 0) {
-				if (read == '\n') {
-						countSt++;
-						count = 1;
-				}
-				if (Character.isLetter(read) == true || read == '\'' || Character.DASH_PUNCTUATION == Character.getType(read)) {
-					   letters.append((char)read);	
-				} else {
-					String lettersSt = letters.toString();
-					if (words.containsKey(lettersSt.toLowerCase())) {
+		OwnScanner scan1 = new OwnScanner(args[0], "utf8");
+		while (scan1.hasNextLine()) {
+			String line = scan1.nextLine();
+			OwnScanner scan2 = new OwnScanner(line);
+			while (scan2.hasNextWord()) {
+				String lettersSt = scan2.nextWord();
+				if (words.containsKey(lettersSt.toLowerCase())) {
 					words.replace(lettersSt.toLowerCase(), words.get(lettersSt.toLowerCase()) + 1);
 					wspp.replace(lettersSt.toLowerCase(), wspp.get(lettersSt.toLowerCase()).append(" " + countSt + ":" + count));
 					count++;
-					letters.setLength(0);	
-					} else {
-						if (letters.length() != 0) {
-							words.put(lettersSt.toLowerCase(), 1);
-							wspp.put(lettersSt.toLowerCase(), new StringBuilder(countSt + ":" + count + ""));
-							count++;
-							letters.setLength(0);
-						}
-					}
+				} else {
+					words.put(lettersSt.toLowerCase(), 1);
+					wspp.put(lettersSt.toLowerCase(), new StringBuilder(countSt + ":" + count + ""));
+					count++;
 				}
-				read = reader.read();
 			}
-		} finally {
-			reader.close();
+			count = 1;
+			countSt++;
+			scan2.close();
 		}
+		scan1.close();	
 		BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(
 			new FileOutputStream(args[1]),
 			"utf8"
