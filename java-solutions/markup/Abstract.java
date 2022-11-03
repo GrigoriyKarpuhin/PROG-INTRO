@@ -9,6 +9,7 @@ public abstract class Abstract implements Markup{
     protected abstract String mark();
     protected abstract String lhtml();
     protected abstract String rhtml();
+
     public void toMarkdown(StringBuilder build){
         build.append(mark());
         for (int i = 0; i < symbols.size(); i++) {
