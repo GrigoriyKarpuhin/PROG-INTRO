@@ -28,7 +28,7 @@ public abstract class AbstractExpression implements General {
 
     public boolean equals(Object object) {
         if (object != null) {
-            return ((object.getClass() == getClass()) &&
+            return ((object instanceof AbstractExpression) &&
                     ((AbstractExpression) object).element1.equals(this.element1) &&
                     ((AbstractExpression) object).element2.equals(this.element2) &&
                     ((AbstractExpression) object).sign().equals(sign()));

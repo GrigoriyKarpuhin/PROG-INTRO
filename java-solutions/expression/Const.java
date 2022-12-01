@@ -22,7 +22,7 @@ public class Const implements General {
 
     public boolean equals(Object object) {
         if (object != null) {
-            return ((object.getClass() == getClass()) &&
+            return ((object instanceof Const) &&
                     ((Const) object).constant == (this.constant));
         } else {
             return false;

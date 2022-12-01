@@ -25,7 +25,7 @@ public class Variable implements General {
     }
     public boolean equals(Object object) {
         if (object != null) {
-            return ((object.getClass() == getClass()) &&
+            return ((object instanceof Variable) &&
                     ((Variable) object).variable.equals(this.variable));
         } else {
             return false;
