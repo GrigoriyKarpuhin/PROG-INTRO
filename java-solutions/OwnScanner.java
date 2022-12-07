@@ -54,20 +54,17 @@ public class OwnScanner {
         if (bufferSize <= 0) {
             return false;
         } else {
-			int read = buffer[number];
-			number++;
-			if (number == bufferSize) {
+            int read = buffer[number];
+            number++;
+            if (number == bufferSize) {
                 BufferCreate();
             }
-			StringBuilder sbStr = new StringBuilder();
+            StringBuilder sbStr = new StringBuilder();
             while (number < bufferSize) {
-                if (System.lineSeparator().length() == 1 && read == System.lineSeparator().charAt(0)) {
-                    break;
-                }
-                if (System.lineSeparator().length() == 2 && read == '\n') {
-                    break;
-                }
                 sbStr.append((char) read);
+                if (read == System.lineSeparator().charAt(System.lineSeparator().length() - 1)) {
+                    break;
+                }
                 read = buffer[number];
                 number++;
                 if (number == bufferSize) {
@@ -130,7 +127,7 @@ public class OwnScanner {
             String word;
             int read = buffer[number];
             number++;
-			if (number == bufferSize) {
+            if (number == bufferSize) {
                 BufferCreate();
             }
             while (number < bufferSize) {
@@ -199,10 +196,10 @@ public class OwnScanner {
     }
 
     public boolean hasNextNumber() {
-            numbercheck = nextNumber();
-            if (numbercheck.length() > 0) {
-                return hasNumber = true;
-            } else {
+        numbercheck = nextNumber();
+        if (numbercheck.length() > 0) {
+            return hasNumber = true;
+        } else {
             return hasNumber = false;
         }
     }
