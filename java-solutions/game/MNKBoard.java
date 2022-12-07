@@ -5,14 +5,14 @@ import java.util.Map;
 
 public class MNKBoard implements Board, Position {
 
-    private static final Map<mnk.Cell, Character> SYMBOLS = Map.of(
-            mnk.Cell.X, 'X',
-            mnk.Cell.O, 'O',
-            mnk.Cell.E, '.'
+    private static final Map<game.Cell, Character> SYMBOLS = Map.of(
+            game.Cell.X, 'X',
+            game.Cell.O, 'O',
+            game.Cell.E, '.'
     );
 
-    private final mnk.Cell[][] cells;
-    private mnk.Cell turn;
+    private final game.Cell[][] cells;
+    private game.Cell turn;
 
     private final int m;
     private final int n;
@@ -46,7 +46,7 @@ public class MNKBoard implements Board, Position {
     @Override
     public Result makeMove(Move move) {
         if (!isValid(move)) {
-            return mnk.Result.LOSE;
+            return game.Result.LOSE;
         }
         cells[move.getRow()][move.getColumn()] = move.getValue();
         int empty = m * n;
@@ -88,7 +88,7 @@ public class MNKBoard implements Board, Position {
     public boolean isValid(Move move) {
         return 0 <= move.getRow() && move.getRow() < m
                 && 0 <= move.getColumn() && move.getColumn() < n
-                && cells[move.getRow()][move.getColumn()] == mnk.Cell.E
+                && cells[move.getRow()][move.getColumn()] == game.Cell.E
                 && turn == getCell();
     }
 

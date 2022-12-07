@@ -1,48 +1,39 @@
 import java.io.*;
 import java.util.*;
+
+
 //
 public class WordStatInput {
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) {
 		LinkedHashMap<String, Integer> words = new LinkedHashMap<>();
-		StringBuilder letters = new StringBuilder();
-		Reader reader = new BufferedReader(new InputStreamReader(
-			new FileInputStream(args[0]),
-			"utf8"
-		));
-		try {
-			int read = reader.read();
-			while (read >= 0) {
-				if (Character.isLetter(read) == true || read == '\'' || Character.DASH_PUNCTUATION == Character.getType(read)) {
-					   letters.append((char)read);	
-				} else {
-					String lettersSt = letters.toString();
-					if (words.containsKey(lettersSt.toLowerCase())) {
+		OwnScanner scan1 = new OwnScanner(args[0], "utf8");
+		while (scan1.hasNextLine()) {
+			String line = scan1.nextLine();
+			OwnScanner scan2 = new OwnScanner(line);
+			while (scan2.hasNextWord()) {
+				String lettersSt = scan2.nextWord();
+				if (words.containsKey(lettersSt.toLowerCase())) {
 					words.replace(lettersSt.toLowerCase(), words.get(lettersSt.toLowerCase()) + 1);
-					letters.setLength(0);	
-					} else {
-						if (letters.length() != 0) {
-							words.put(lettersSt.toLowerCase(), 1);
-							letters.setLength(0);
-						}
-					}
+				} else {
+					words.put(lettersSt.toLowerCase(), 1);
 				}
-				read = reader.read();
 			}
-		} finally {
-			reader.close();
+			scan2.close();
 		}
-		BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(
-			new FileOutputStream(args[1]),
-			"utf8"
-		));
-		Set<String> key = words.keySet();
+		scan1.close();
 		try {
-			for(String s: key) {
-				writer.write(s + " " + words.get(s));
-				writer.newLine();
-			}
-		} finally {
-			writer.close();
+			BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(
+					new FileOutputStream(args[1]),
+					"utf8"
+			));
+			Set<String> key = words.keySet();
+				for (String s : key) {
+					writer.write(s + " " + words.get(s));
+					writer.newLine();
+				}
+				writer.close();
+		} catch (IOException e) {
+			throw new RuntimeException(e);
 		}
 	}
 }
