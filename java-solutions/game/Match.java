@@ -1,4 +1,4 @@
-package mnk;
+package game;
 
 public class Match {
     private final Board board;
