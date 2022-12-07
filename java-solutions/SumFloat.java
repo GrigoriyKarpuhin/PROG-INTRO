@@ -1,6 +1,6 @@
-public class Sum {
+public class SumFloat {
     public static void main(String[] args) {
-	    int sum = 0;
+	    float sum = 0;
 		int num0 = 0;
 		boolean switch1 = false;
 		boolean switch2 = false;
@@ -15,14 +15,14 @@ public class Sum {
 			    }
 		        if (switch2 && !switch1) { 
 			        String line = (args[i].substring(num0, num));
-				    int add = Integer.parseInt(line);
+				    float add = Float.parseFloat(line);
 	                sum = sum + add;
 				    switch2 = false;
 			    }
                 if (switch2 && switch1) {
                     if (num == args[i].length()-1) {	
 				        String line = (args[i].substring(num0));
-				        int add = Integer.parseInt(line);
+				        float add = Float.parseFloat(line);
 	                    sum = sum + add;
 					    switch1 = false;
 					    switch2 = false;

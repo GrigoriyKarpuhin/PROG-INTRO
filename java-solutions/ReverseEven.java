@@ -1,7 +1,7 @@
 import java.util.Scanner;
 import java.util.Arrays;
 //
-public class Reverse {
+public class ReverseEven {
     public static void main(String[] args) {
 	    int[][] arrInts = new int[1][1];
 		int column = 0;
@@ -27,8 +27,10 @@ public class Reverse {
 		arrInts = Arrays.copyOf(arrInts, column);
         for (int i = column - 1; i >= 0; i--) {
 	        for (int j = arrInts[i].length - 1; j >= 0; j--) {
+			    if ((arrInts[i][j] % 2) == 0) {
 					System.out.print(arrInts[i][j]);
 				    System.out.print(" ");
+			    }
 			}
 			System.out.println("");
 		}
