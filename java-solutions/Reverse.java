@@ -1,4 +1,3 @@
-import java.io.IOException;
 import java.util.Arrays;
 //
 public class Reverse {
@@ -25,12 +24,12 @@ public class Reverse {
 			column += 1;
 		}
 		arrInts = Arrays.copyOf(arrInts, column);
-        for (int i = column - 1; i >= 0; i--) {
+        for (int i = column - 2; i >= 0; i--) {
 	        for (int j = arrInts[i].length - 1; j >= 0; j--) {
 					System.out.print(arrInts[i][j]);
 				    System.out.print(" ");
 			}
-			System.out.println("");
+			System.out.println();
 		}
     }
 }       

@@ -18,7 +18,7 @@ public class OwnScanner {
     private boolean hasNumber;
     private String numbercheck;
     private boolean switchNumber;
-    private final int sepStop = System.lineSeparator().charAt(System.lineSeparator().length() - 1);
+    private final int sepStop = System.lineSeparator().charAt(0);
 
     public OwnScanner(String line)  {
         this.reader = new StringReader(line);
