@@ -18,6 +18,7 @@ public class OwnScanner {
     private boolean hasNumber;
     private String numbercheck;
     private boolean switchNumber;
+    private final int sepStop = System.lineSeparator().charAt(System.lineSeparator().length() - 1);
 
     public OwnScanner(String line)  {
         this.reader = new StringReader(line);
@@ -62,7 +63,7 @@ public class OwnScanner {
             StringBuilder sbStr = new StringBuilder();
             while (number < bufferSize) {
                 sbStr.append((char) read);
-                if (read == System.lineSeparator().charAt(System.lineSeparator().length() - 1)) {
+                if (read == sepStop) {
                     break;
                 }
                 read = buffer[number];
