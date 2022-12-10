@@ -1,10 +1,11 @@
+import java.util.Scanner;
 import java.util.Arrays;
 //
 public class Reverse {
     public static void main(String[] args) {
 	    int[][] arrInts = new int[1][1];
 		int column = 0;
-		OwnScanner scan1 = new OwnScanner(System.in);
+		Scanner scan1 = new Scanner(System.in);
 		while (scan1.hasNextLine()) {
 			if (column == arrInts.length) {
 			    arrInts = Arrays.copyOf(arrInts, arrInts.length * 2);
@@ -12,7 +13,7 @@ public class Reverse {
 			arrInts[column] = new int[1];
 			int line = 0;
 			String lines = scan1.nextLine();
-			OwnScanner scan2 = new OwnScanner(lines);
+			Scanner scan2 = new Scanner(lines);			
             while (scan2.hasNextInt()) {			
 				if (line == arrInts[column].length) {
 					arrInts[column] = Arrays.copyOf(arrInts[column], arrInts[column].length * 2);
@@ -24,12 +25,12 @@ public class Reverse {
 			column += 1;
 		}
 		arrInts = Arrays.copyOf(arrInts, column);
-        for (int i = column - 2; i >= 0; i--) {
+        for (int i = column - 1; i >= 0; i--) {
 	        for (int j = arrInts[i].length - 1; j >= 0; j--) {
 					System.out.print(arrInts[i][j]);
 				    System.out.print(" ");
 			}
-			System.out.println();
+			System.out.println("");
 		}
     }
 }       
